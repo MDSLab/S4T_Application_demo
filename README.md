@@ -2,7 +2,7 @@
 
 This plugin simulates a real-time environmental data stream by reading rows from a CSV file, assigning each one a fresh timestamp, and sending it to InfluxDB every 30 seconds.
 
-It is designed to be used within the [Lightning-rod](https://github.com/MDSLab/IoTronic-Lightning-rod) framework, but can also be adapted for standalone testing.
+It is designed to be used within the Stack4Things framework, but can also be adapted for standalone testing.
 
 ---
 
@@ -81,7 +81,34 @@ exit
 ```
 ---
 
-### 4. Validate Data Insertion (After Plugin Starts)
+### 4 Deploying the Plugin in the Stack4Things / IoTronic Platform
+
+To integrate this plugin into a real IoT deployment managed by the Stack4Things framework, follow the standard plugin lifecycle supported by IoTronic.
+
+### 4.1. Plugin Creation
+
+The plugin must be written in Python and structured as a class named `Worker`, inheriting from the base `Plugin` class provided by Lightning-rod. This script is then packaged in a compressed archive (typically `.tar.gz`) to be made available to the IoTronic controller.
+
+### 4.2. Deployment on the Board
+
+Once the plugin is packaged, it is copied onto the target board that runs the Lightning-rod agent. This ensures the board has access to the plugin code locally and can execute it upon request.
+
+The plugin file is typically placed in the standard plugin directory of Lightning-rod, or in a custom path depending on the deployment configuration.
+
+### 4.3. Injection via IoTronic
+
+After the plugin is available on the board, it must be registered (or "injected") into the IoTronic system. This step associates the plugin with a specific board and makes it manageable through the IoTronic APIs and dashboard.
+
+The injection process involves assigning a name to the plugin, specifying the callable class (e.g., `Worker`), and linking it to the board's unique identifier.
+
+### 4.4. Plugin Activation
+
+Once injected, the plugin becomes available to be started. The IoTronic controller can request the Lightning-rod agent to start the plugin at any time. Upon activation, the plugin will begin its execution loop, reading the dataset, sending data to InfluxDB, and logging progress.
+
+At any moment, the plugin can also be stopped or restarted from the IoTronic interface or controller, allowing full lifecycle control.
+
+
+### 5. Validate Data Insertion (After Plugin Starts)
 
 Once the plugin begins publishing data, you can return to the InfluxDB shell to check that points are being written correctly.
 
@@ -101,7 +128,7 @@ time Gust Humidity Temperature ...
 2025-05-22T08:31:00Z 1.2 84.0 18.9 ...
 ```
 
-Official IoTronic Repositories
+### 6. Official IoTronic Repositories
 
 The IoTronic ecosystem is actively developed and maintained under the [OpenDev](https://opendev.org/) community infrastructure.
 
