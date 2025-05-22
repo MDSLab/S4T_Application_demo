@@ -87,19 +87,17 @@ To integrate this plugin into a real IoT deployment managed by the Stack4Things 
 
 ### 4.1. Plugin Creation
 
-The plugin must be written in Python and structured as a class named `Worker`, inheriting from the base `Plugin` class provided by Lightning-rod. This script is then packaged in a compressed archive (typically `.tar.gz`) to be made available to the IoTronic controller.
+The plugin must be written in Python and structured as a class named `Worker`, inheriting from the base `Plugin` class provided by Lightning-rod. 
 
 ### 4.2. Deployment on the Board
 
-Once the plugin is packaged, it is copied onto the target board that runs the Lightning-rod agent. This ensures the board has access to the plugin code locally and can execute it upon request.
-
-The plugin file is typically placed in the standard plugin directory of Lightning-rod, or in a custom path depending on the deployment configuration.
+Once the plugin is created in Stack4Things, it is copied onto the target form in Stack4Things panel. 
 
 ### 4.3. Injection via IoTronic
 
-After the plugin is available on the board, it must be registered (or "injected") into the IoTronic system. This step associates the plugin with a specific board and makes it manageable through the IoTronic APIs and dashboard.
+After the plugin is available on the S4T dashboard, it must be injected into the board. This step associates the plugin with a specific board and makes it manageable through the IoTronic APIs and dashboard.
 
-The injection process involves assigning a name to the plugin, specifying the callable class (e.g., `Worker`), and linking it to the board's unique identifier.
+The injection process involves assigning a name to the plugin.
 
 ### 4.4. Plugin Activation
 
