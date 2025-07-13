@@ -1,0 +1,132 @@
+{
+  "id": null,
+  "uid": "env-monitor",
+  "title": "Environmental Monitoring",
+  "tags": ["iot", "environment"],
+  "timezone": "browser",
+  "schemaVersion": 37,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Temperature (°C)",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "id": 1,
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "refId": "A",
+          "measurement": "environmental_data",
+          "groupBy": [
+            { "type": "time", "params": ["$__interval"] }
+          ],
+          "select": [
+            [
+              { "type": "field", "params": ["Temperature"] },
+              { "type": "mean", "params": [] }
+            ]
+          ],
+          "orderByTime": "ASC"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1,
+      "legend": { "show": true },
+      "tooltip": { "shared": true, "value_type": "individual" },
+      "xaxis": { "mode": "time", "show": true },
+      "yaxis": { "format": "celsius", "show": true }
+    },
+    {
+      "type": "graph",
+      "title": "Humidity (%)",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "id": 2,
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "refId": "B",
+          "measurement": "environmental_data",
+          "groupBy": [
+            { "type": "time", "params": ["$__interval"] }
+          ],
+          "select": [
+            [
+              { "type": "field", "params": ["Humidity"] },
+              { "type": "mean", "params": [] }
+            ]
+          ],
+          "orderByTime": "ASC"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1,
+      "legend": { "show": true },
+      "tooltip": { "shared": true, "value_type": "individual" },
+      "xaxis": { "mode": "time", "show": true },
+      "yaxis": { "format": "percent", "show": true }
+    },
+    {
+      "type": "graph",
+      "title": "PM10 (μg/m³)",
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+      "id": 3,
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "refId": "C",
+          "measurement": "environmental_data",
+          "groupBy": [
+            { "type": "time", "params": ["$__interval"] }
+          ],
+          "select": [
+            [
+              { "type": "field", "params": ["PM10"] },
+              { "type": "mean", "params": [] }
+            ]
+          ],
+          "orderByTime": "ASC"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1,
+      "legend": { "show": true },
+      "tooltip": { "shared": true, "value_type": "individual" },
+      "xaxis": { "mode": "time", "show": true },
+      "yaxis": { "format": "short", "show": true }
+    },
+    {
+      "type": "graph",
+      "title": "Wind Speed (m/s)",
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+      "id": 4,
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "refId": "D",
+          "measurement": "environmental_data",
+          "groupBy": [
+            { "type": "time", "params": ["$__interval"] }
+          ],
+          "select": [
+            [
+              { "type": "field", "params": ["Wind_speed"] },
+              { "type": "mean", "params": [] }
+            ]
+          ],
+          "orderByTime": "ASC"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1,
+      "legend": { "show": true },
+      "tooltip": { "shared": true, "value_type": "individual" },
+      "xaxis": { "mode": "time", "show": true },
+      "yaxis": { "format": "velocity", "show": true }
+    }
+  ]
+}
